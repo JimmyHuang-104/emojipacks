@@ -32,7 +32,7 @@ co(function*() {
     program.password,
     program.pack
   );
-  const pack = yield Pack.get(user.pack);
+  let pack = yield Pack.get(user.pack);
   pack = clean(pack);
   user.emojis = pack.emojis;
   const slack = new Slack(user, program.debug);
