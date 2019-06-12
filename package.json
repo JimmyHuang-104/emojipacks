@@ -30,7 +30,8 @@
   },
   "preferGlobal": true,
   "bin": {
-    "emojipacks": "./bin/emojipacks"
+    "emojipacks": "./bin/emojipacks",
+    "convert-to-emojipack": "./bin/convert-to-emojipack"
   },
   "dependencies": {
     "chalk": "^1.1.0",
