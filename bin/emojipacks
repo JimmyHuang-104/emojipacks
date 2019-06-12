@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var Prompt = require('../lib/prompt');
-var Slack = require('../lib/slack');
-var Pack = require('../lib/pack');
-var co = require('co');
+var program = require("commander");
+var Prompt = require("../lib/prompt");
+var Slack = require("../lib/slack");
+var Pack = require("../lib/pack");
+var co = require("co");
 
 /**
  * Usage.
@@ -24,8 +24,14 @@ program
  * Start process.
  */
 
-co(function *() {
-  var user = yield Prompt.start(program.subdomain, program.apiToken, program.email, program.password, program.pack);
+co(function*() {
+  var user = yield Prompt.start(
+    program.subdomain,
+    program.apiToken,
+    program.email,
+    program.password,
+    program.pack
+  );
   var pack = yield Pack.get(user.pack);
   pack = clean(pack);
   user.emojis = pack.emojis;
