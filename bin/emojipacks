@@ -11,12 +11,13 @@ var co = require('co');
  */
 
 program
-  .version(require('../package').version)
-  .option('-d, --debug', 'Run in debug mode')
-  .option('-s, --subdomain [value]', 'Your Slack subdomain')
-  .option('-e, --email [value]', 'Admin email address')
-  .option('-p, --password [value]', 'Password for admin email')
-  .option('-y, --pack [value]', 'YAML emoji pack')
+  .version(require("../package").version)
+  .option("-d, --debug", "Run in debug mode")
+  .option("-s, --subdomain [value]", "Your Slack subdomain")
+  .option("-t, --api-token [value]", "Your Slack api token")
+  .option("-e, --email [value]", "Admin email address")
+  .option("-p, --password [value]", "Password for admin email")
+  .option("-y, --pack [value]", "YAML emoji pack")
   .parse(process.argv);
 
 /**
@@ -24,7 +25,7 @@ program
  */
 
 co(function *() {
-  var user = yield Prompt.start(program.subdomain, program.email, program.password, program.pack);
+  var user = yield Prompt.start(program.subdomain, program.apiToken, program.email, program.password, program.pack);
   var pack = yield Pack.get(user.pack);
   pack = clean(pack);
   user.emojis = pack.emojis;
