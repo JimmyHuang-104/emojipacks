@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var program = require("commander");
-var Prompt = require("../lib/prompt");
-var Slack = require("../lib/slack");
-var Pack = require("../lib/pack");
-var co = require("co");
+const program = require("commander");
+const Prompt = require("../lib/prompt");
+const Slack = require("../lib/slack");
+const Pack = require("../lib/pack");
+const co = require("co");
 
 /**
  * Usage.
@@ -25,17 +25,17 @@ program
  */
 
 co(function*() {
-  var user = yield Prompt.start(
+  const user = yield Prompt.start(
     program.subdomain,
     program.apiToken,
     program.email,
     program.password,
     program.pack
   );
-  var pack = yield Pack.get(user.pack);
+  const pack = yield Pack.get(user.pack);
   pack = clean(pack);
   user.emojis = pack.emojis;
-  var slack = new Slack(user, program.debug);
+  const slack = new Slack(user, program.debug);
   yield slack.import();
   process.exit();
 });
@@ -47,7 +47,7 @@ co(function*() {
 function clean(object) {
   if (!object.emojis) {
     object.emojis = [];
-    for (var i = 0; i < object.length; i++) {
+    for (const i = 0; i < object.length; i++) {
       if (!object[i].src) object[i].src = object[i].image_url;
       object.emojis.push(object[i]);
     }
